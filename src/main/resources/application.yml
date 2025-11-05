@@ -15,7 +15,7 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      enabled: true
+      enabled: false  # Runner로 수동 실행
       # 실행할 Job 이름 지정 (쉼표로 구분하여 여러 개 실행 가능)
       # 예시:
       # - 전체: name: allDataGenerationJob
