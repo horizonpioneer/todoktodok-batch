@@ -39,16 +39,57 @@ public class DataGenerationJobConfig {
 
     private final Random random = new Random();
 
+    // 전체 데이터 생성 Job (모든 Step 실행)
     @Bean
-    public Job dataGenerationJob(JobRepository jobRepository, Step memberGenerationStep,
-                                  Step bookGenerationStep, Step discussionGenerationStep,
-                                  Step commentGenerationStep, Step replyGenerationStep) {
-        return new JobBuilder("dataGenerationJob", jobRepository)
+    public Job allDataGenerationJob(JobRepository jobRepository, Step memberGenerationStep,
+                                     Step bookGenerationStep, Step discussionGenerationStep,
+                                     Step commentGenerationStep, Step replyGenerationStep) {
+        return new JobBuilder("allDataGenerationJob", jobRepository)
                 .start(memberGenerationStep)
                 .next(bookGenerationStep)
                 .next(discussionGenerationStep)
                 .next(commentGenerationStep)
                 .next(replyGenerationStep)
+                .build();
+    }
+
+    // 회원 데이터만 생성
+    @Bean
+    public Job memberDataGenerationJob(JobRepository jobRepository, Step memberGenerationStep) {
+        return new JobBuilder("memberDataGenerationJob", jobRepository)
+                .start(memberGenerationStep)
+                .build();
+    }
+
+    // 책 데이터만 생성
+    @Bean
+    public Job bookDataGenerationJob(JobRepository jobRepository, Step bookGenerationStep) {
+        return new JobBuilder("bookDataGenerationJob", jobRepository)
+                .start(bookGenerationStep)
+                .build();
+    }
+
+    // 토론 데이터만 생성
+    @Bean
+    public Job discussionDataGenerationJob(JobRepository jobRepository, Step discussionGenerationStep) {
+        return new JobBuilder("discussionDataGenerationJob", jobRepository)
+                .start(discussionGenerationStep)
+                .build();
+    }
+
+    // 댓글 데이터만 생성
+    @Bean
+    public Job commentDataGenerationJob(JobRepository jobRepository, Step commentGenerationStep) {
+        return new JobBuilder("commentDataGenerationJob", jobRepository)
+                .start(commentGenerationStep)
+                .build();
+    }
+
+    // 답글 데이터만 생성
+    @Bean
+    public Job replyDataGenerationJob(JobRepository jobRepository, Step replyGenerationStep) {
+        return new JobBuilder("replyDataGenerationJob", jobRepository)
+                .start(replyGenerationStep)
                 .build();
     }
 

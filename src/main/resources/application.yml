@@ -15,7 +15,17 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      enabled: true  # 자동 실행 방지
+      enabled: true
+      # 실행할 Job 이름 지정 (쉼표로 구분하여 여러 개 실행 가능)
+      # 예시:
+      # - 전체: name: allDataGenerationJob
+      # - 회원만: name: memberDataGenerationJob
+      # - 책만: name: bookDataGenerationJob
+      # - 토론만: name: discussionDataGenerationJob
+      # - 댓글만: name: commentDataGenerationJob
+      # - 답글만: name: replyDataGenerationJob
+      # - 여러 개: name: memberDataGenerationJob,bookDataGenerationJob
+      name: allDataGenerationJob
 
 logging:
   level:
